@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ThemeProvider } from "next-themes";
+import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "@/components/mode-toggle";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,21 +27,26 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex justify-end p-4">
-            <header>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <header className="flex justify-end p-4">
+              <div className="flex gap-x-2">
+                <ModeToggle />
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+              </div>
             </header>
-          </header>
-          {children}
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
