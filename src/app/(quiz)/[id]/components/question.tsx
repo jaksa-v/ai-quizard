@@ -43,7 +43,7 @@ export default function Question({
               key={index}
               autoFocus={false}
               onClick={() => onAnswer(index)}
-              variant="outline"
+              variant="quiz"
             >
               {answer}
             </Button>

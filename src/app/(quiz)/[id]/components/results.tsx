@@ -32,7 +32,7 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
             correct.
           </p>
         </CardHeader>
-        <CardContent className="h-[55dvh] overflow-scroll">
+        <CardContent className="h-[55dvh] md:h-[65dvh] overflow-scroll">
           <div className="space-y-4">
             {quiz.questions.map((question, index) => (
               <div key={index} className="border-b pb-4 last:border-b-0">

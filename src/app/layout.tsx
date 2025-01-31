@@ -4,6 +4,8 @@ import { ThemeProvider } from "next-themes";
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
 import "./globals.css";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +39,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className="flex justify-end p-4">
+            <header className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
+              <Link href="/">
+                <Button variant="link">Home</Button>
+              </Link>
               <div className="flex gap-x-2">
                 <ModeToggle />
                 <SignedIn>
