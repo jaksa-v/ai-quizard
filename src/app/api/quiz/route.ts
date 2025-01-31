@@ -1,9 +1,18 @@
+"use server";
+
 import { quizSchema } from "@/types/quiz";
 import { anthropic } from "@ai-sdk/anthropic";
+import { auth } from "@clerk/nextjs/server";
 import { generateObject } from "ai";
 import { z } from "zod";
 
 export async function POST(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   const prompt = await req.json();
   const verifiedPrompt = z.string().safeParse(prompt);
 
