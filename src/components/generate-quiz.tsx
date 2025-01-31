@@ -4,9 +4,13 @@ import { Button } from "@/components/ui/button";
 import { quizSchema, prompt } from "@/types/quiz";
 import { experimental_useObject as useObject } from "ai/react";
 import { useRouter } from "next/navigation";
-import { saveQuiz } from "../actions";
+import { saveQuiz } from "@/app/(quiz)/actions";
 
-export default function Quiz() {
+interface QuizProps {
+  buttonText?: string;
+}
+
+export default function Quiz({ buttonText = "Generate Quiz" }: QuizProps) {
   const router = useRouter();
   const { object, submit, isLoading, stop, error } = useObject({
     api: "/api/quiz",
@@ -21,20 +25,24 @@ export default function Quiz() {
     },
   });
   return (
-    <>
+    <div className="relative">
       {error && <p>{error?.message}</p>}
       {object ? (
-        <span>Done! Initializing...</span>
+        <span className="text-muted-foreground">Done! Initializing...</span>
       ) : (
         <Button onClick={() => submit(prompt)}>
-          {isLoading ? "Generating..." : "Generate Quiz"}
+          {isLoading ? "Generating..." : buttonText}
         </Button>
       )}
       {isLoading && (
-        <button type="button" onClick={() => stop()}>
+        <Button
+          className="absolute -right-16 top-0"
+          variant="link"
+          onClick={() => stop()}
+        >
           Stop
-        </button>
+        </Button>
       )}
-    </>
+    </div>
   );
 }

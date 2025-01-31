@@ -7,6 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import GenerateQuiz from "../../../../components/generate-quiz";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 type ResultsProps = {
   quiz: Quiz;
@@ -58,10 +61,17 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
             ))}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button onClick={onReset} variant="default">
+        <CardFooter className="flex gap-x-2">
+          <Link href="/">
+            <Button variant="link">
+              <ArrowLeft />
+              Home
+            </Button>
+          </Link>
+          <Button onClick={onReset} variant="outline">
             Restart Quiz
           </Button>
+          <GenerateQuiz buttonText="Generate Another" />
         </CardFooter>
       </Card>
     </div>

@@ -14,5 +14,9 @@ export default async function QuizPage({
     return notFound();
   }
 
-  return <Quiz quiz={quiz} />;
+  return (
+    <div className="min-h-[calc(100vh-60px)]">
+      <Quiz quiz={quiz} />
+    </div>
+  );
 }
