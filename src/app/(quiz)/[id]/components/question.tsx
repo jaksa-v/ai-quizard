@@ -33,6 +33,7 @@ export default function Question({
           {question.answers.map((answer, index) => (
             <Button
               key={index}
+              autoFocus={false}
               onClick={() => onAnswer(index)}
               variant="outline"
             >
