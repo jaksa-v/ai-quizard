@@ -23,7 +23,7 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
   ).length;
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="flex items-center justify-center px-4">
       <Card className="w-full max-w-2xl">
         <CardHeader>
           <CardTitle>Quiz Results</CardTitle>
@@ -32,7 +32,7 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
             correct.
           </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="h-[60dvh] overflow-scroll">
           <div className="space-y-4">
             {quiz.questions.map((question, index) => (
               <div key={index} className="border-b pb-4 last:border-b-0">
@@ -61,16 +61,18 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
             ))}
           </div>
         </CardContent>
-        <CardFooter className="flex gap-x-2">
-          <Link href="/">
-            <Button variant="link">
-              <ArrowLeft />
-              Home
+        <CardFooter className="flex flex-col md:flex-row justify-center items-center gap-2 mt-auto border-t pt-4">
+          <div className="flex gap-x-2">
+            <Link href="/">
+              <Button variant="link">
+                <ArrowLeft />
+                Home
+              </Button>
+            </Link>
+            <Button onClick={onReset} variant="outline">
+              Restart Quiz
             </Button>
-          </Link>
-          <Button onClick={onReset} variant="outline">
-            Restart Quiz
-          </Button>
+          </div>
           <GenerateQuiz buttonText="Generate Another" />
         </CardFooter>
       </Card>
