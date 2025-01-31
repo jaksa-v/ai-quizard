@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useEffect } from "react";
 
 type QuestionProps = {
   question: QuizQuestion;
@@ -21,6 +22,13 @@ export default function Question({
   currentQuestion,
   totalQuestions,
 }: QuestionProps) {
+  useEffect(() => {
+    // Clear any focused element when the question changes
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  }, [question]);
+
   return (
     <Card>
       <CardHeader>

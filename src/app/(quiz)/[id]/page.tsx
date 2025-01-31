@@ -15,7 +15,7 @@ export default async function QuizPage({
   }
 
   return (
-    <div className="min-h-[calc(100vh-60px)]">
+    <div className="min-h-[calc(100vh-68px)] flex justify-center items-center">
       <Quiz quiz={quiz} />
     </div>
   );
