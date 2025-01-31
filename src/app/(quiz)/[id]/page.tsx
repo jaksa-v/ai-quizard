@@ -1,8 +1,18 @@
-export default async function Quiz({
+import { getQuizById } from "@/db/queries";
+import Quiz from "./components/quiz";
+import { notFound } from "next/navigation";
+
+export default async function QuizPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return <div>Quiz {id}</div>;
+  const quiz = await getQuizById(id);
+
+  if (!quiz) {
+    return notFound();
+  }
+
+  return <Quiz quiz={quiz} />;
 }
