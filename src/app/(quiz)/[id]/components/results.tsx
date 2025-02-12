@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import GenerateQuiz from "../../../../components/generate-quiz";
+import GenerateQuiz from "../../components/generate-quiz";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

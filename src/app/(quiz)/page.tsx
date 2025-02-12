@@ -1,4 +1,4 @@
-import GenerateQuiz from "../../components/generate-quiz";
+import GenerateQuiz from "./components/generate-quiz";
 
 export default function Home() {
   return (
