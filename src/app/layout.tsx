@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +36,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
+            {/* <header className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
               <Link href="/">
                 <Button variant="link">Home</Button>
               </Link>
@@ -49,7 +46,7 @@ export default function RootLayout({
                   <UserButton />
                 </SignedIn>
               </div>
-            </header>
+            </header> */}
             {children}
           </ThemeProvider>
         </body>
