@@ -1,7 +1,6 @@
 "use server";
 
-import { db } from "@/db";
-import { quizzes } from "@/db/schema";
+import { MUTATIONS } from "@/db/queries";
 import { Quiz, quizSchema } from "@/types/quiz";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -19,10 +18,7 @@ export const saveQuiz = async (quiz: Quiz) => {
     throw new Error(parsedQuiz.error.message);
   }
 
-  const [newQuiz] = await db
-    .insert(quizzes)
-    .values(parsedQuiz.data)
-    .returning();
+  const newQuizId = MUTATIONS.createQuiz(parsedQuiz.data);
 
-  return newQuiz.id;
+  return newQuizId;
 };

@@ -1,14 +1,19 @@
-import { auth } from "@clerk/nextjs/server";
+import { Quiz } from "@/types/quiz";
 import { db } from ".";
 import { quizzes } from "./schema";
 import { eq } from "drizzle-orm";
 
-export const getQuizById = async (id: string) => {
-  const { userId } = await auth();
+export const QUERIES = {
+  getQuizById: async function (id: string) {
+    const quiz = await db.select().from(quizzes).where(eq(quizzes.id, id));
+    return quiz[0];
+  },
+};
 
-  if (!userId) {
-    return null;
-  }
+export const MUTATIONS = {
+  createQuiz: async function (quiz: Quiz) {
+    const [newQuiz] = await db.insert(quizzes).values(quiz).returning();
 
-  return await db.query.quizzes.findFirst({ where: eq(quizzes.id, id) });
+    return newQuiz.id;
+  },
 };

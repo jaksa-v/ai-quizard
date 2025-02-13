@@ -1,6 +1,7 @@
-import { getQuizById } from "@/db/queries";
+import { QUERIES } from "@/db/queries";
 import Quiz from "./components/quiz";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function QuizPage({
   params,
@@ -8,8 +9,13 @@ export default async function QuizPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const quiz = await getQuizById(id);
 
+  const session = await auth();
+  if (!session.userId) {
+    return redirect("/sign-in");
+  }
+
+  const quiz = await QUERIES.getQuizById(id);
   if (!quiz) {
     return notFound();
   }
