@@ -16,7 +16,7 @@ export default async function QuizPage({
   }
 
   const quiz = await QUERIES.getQuizById(id);
-  if (!quiz) {
+  if (!quiz || quiz.userId !== session.userId) {
     return notFound();
   }
 

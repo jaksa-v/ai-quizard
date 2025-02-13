@@ -18,7 +18,7 @@ export const saveQuiz = async (quiz: Quiz) => {
     throw new Error(parsedQuiz.error.message);
   }
 
-  const newQuizId = MUTATIONS.createQuiz(parsedQuiz.data);
+  const newQuizId = MUTATIONS.createQuiz({ ...parsedQuiz.data, userId });
 
   return newQuizId;
 };

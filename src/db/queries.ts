@@ -11,7 +11,7 @@ export const QUERIES = {
 };
 
 export const MUTATIONS = {
-  createQuiz: async function (quiz: Quiz) {
+  createQuiz: async function (quiz: Quiz & { userId: string }) {
     const [newQuiz] = await db.insert(quizzes).values(quiz).returning();
 
     return newQuiz.id;
