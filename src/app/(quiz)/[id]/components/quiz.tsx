@@ -1,34 +1,53 @@
 "use client";
 
 import { useState } from "react";
-import type { Quiz } from "@/db/schema";
+import type { Quiz, QuizAttempt } from "@/db/schema";
 import Question from "./question";
 import Results from "./results";
+import { updateQuizAttempt } from "../../actions";
 
-export default function Quiz({ quiz }: { quiz: Quiz }) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<number[]>([]);
-  const [showResults, setShowResults] = useState(false);
+export default function Quiz({
+  quiz,
+  attempt,
+}: {
+  quiz: Quiz;
+  attempt: QuizAttempt;
+}) {
+  const [currentQuestion, setCurrentQuestion] = useState(
+    attempt.currentQuestionIndex
+  );
+  const [answers, setAnswers] = useState(attempt.answers);
 
-  const handleAnswer = (answerIndex: number) => {
-    setUserAnswers([...userAnswers, answerIndex]);
+  const handleAnswer = async (answerIndex: number) => {
+    const newAnswers = [...answers];
 
-    if (currentQuestion < quiz.questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResults(true);
-    }
+    newAnswers.push({
+      questionIndex: currentQuestion,
+      selectedAnswerIndex: answerIndex,
+    });
+
+    setAnswers(newAnswers);
+    setCurrentQuestion(currentQuestion + 1);
+
+    await updateQuizAttempt(attempt.id, {
+      answers: newAnswers,
+      currentQuestionIndex: currentQuestion + 1,
+    });
   };
 
   const resetQuiz = () => {
-    setCurrentQuestion(0);
-    setUserAnswers([]);
-    setShowResults(false);
+    // TODO: Reimplement this
+    // setCurrentQuestion(0);
+    // setUserAnswers([]);
   };
 
-  if (showResults) {
+  if (currentQuestion >= quiz.questions.length) {
     return (
-      <Results quiz={quiz} userAnswers={userAnswers} onReset={resetQuiz} />
+      <Results
+        quiz={quiz}
+        userAnswers={answers.map((a) => a.selectedAnswerIndex)}
+        onReset={resetQuiz}
+      />
     );
   }
 

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { quizSchema, prompt } from "@/types/quiz";
 import { experimental_useObject as useObject } from "ai/react";
 import { useRouter } from "next/navigation";
-import { saveQuiz } from "@/app/(quiz)/actions";
+import { createQuizAttempt, saveQuiz } from "@/app/(quiz)/actions";
 
 interface QuizProps {
   buttonText?: string;
@@ -21,6 +21,7 @@ export default function Quiz({ buttonText = "Generate Quiz" }: QuizProps) {
         return;
       }
       const quizId = await saveQuiz(object);
+      await createQuizAttempt(quizId);
       router.push(`/${quizId}`);
     },
   });

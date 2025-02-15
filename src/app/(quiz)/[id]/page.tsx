@@ -20,9 +20,14 @@ export default async function QuizPage({
     return notFound();
   }
 
+  const attempt = await QUERIES.getQuizAttempt(id, session.userId);
+  if (!attempt) {
+    return notFound();
+  }
+
   return (
     <div className="min-h-[calc(100vh-68px)] flex justify-center items-center">
-      <Quiz quiz={quiz} />
+      <Quiz quiz={quiz} attempt={attempt} />
     </div>
   );
 }
