@@ -14,10 +14,10 @@ import Link from "next/link";
 type ResultsProps = {
   quiz: Quiz;
   userAnswers: number[];
-  onReset: () => void;
+  // onReset: () => void;
 };
 
-export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
+export default function Results({ quiz, userAnswers }: ResultsProps) {
   const correctAnswers = userAnswers.filter(
     (answer, index) => answer === quiz.questions[index].correctAnswerIndex
   ).length;
@@ -69,9 +69,9 @@ export default function Results({ quiz, userAnswers, onReset }: ResultsProps) {
                 Home
               </Button>
             </Link>
-            <Button onClick={onReset} variant="outline">
+            {/* <Button onClick={onReset} variant="outline">
               Restart Quiz
-            </Button>
+            </Button> */}
           </div>
           <GenerateQuiz buttonText="Generate Another" />
         </CardFooter>

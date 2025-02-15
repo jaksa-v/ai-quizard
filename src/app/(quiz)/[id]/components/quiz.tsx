@@ -35,18 +35,18 @@ export default function Quiz({
     });
   };
 
-  const resetQuiz = () => {
-    // TODO: Reimplement this
-    // setCurrentQuestion(0);
-    // setUserAnswers([]);
-  };
+  // NOTE: hiding this for now
+  // const resetQuiz = () => {
+  //   setCurrentQuestion(0);
+  //   setUserAnswers([]);
+  // };
 
   if (currentQuestion >= quiz.questions.length) {
     return (
       <Results
         quiz={quiz}
         userAnswers={answers.map((a) => a.selectedAnswerIndex)}
-        onReset={resetQuiz}
+        // onReset={resetQuiz}
       />
     );
   }
