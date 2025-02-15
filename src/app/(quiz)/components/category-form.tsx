@@ -53,7 +53,7 @@ export default function CategoryForm({
           );
         })}
       </div>
-      <div className="flex flex-col gap-y-2 items-center">
+      <div className="relative flex justify-center">
         <Button
           type="submit"
           disabled={selectedCategories.length === 0 || isLoading}
@@ -62,12 +62,13 @@ export default function CategoryForm({
           {isLoading ? "Generating..." : "Generate Quiz"}
         </Button>
         {isLoading && (
-          <button
-            className="text-sm text-muted-foreground hover:text-foreground"
+          <Button
+            variant="link"
+            className="absolute -bottom-10"
             onClick={() => stop()}
           >
             Stop
-          </button>
+          </Button>
         )}
       </div>
     </form>

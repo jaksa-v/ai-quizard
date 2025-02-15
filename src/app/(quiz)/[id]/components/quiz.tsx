@@ -52,15 +52,13 @@ export default function Quiz({
   }
 
   return (
-    <div className="flex items-center justify-center px-4">
-      <div className="w-full max-w-2xl">
-        <Question
-          question={quiz.questions[currentQuestion]}
-          onAnswer={handleAnswer}
-          currentQuestion={currentQuestion + 1}
-          totalQuestions={quiz.questions.length}
-        />
-      </div>
+    <div className="">
+      <Question
+        question={quiz.questions[currentQuestion]}
+        onAnswer={handleAnswer}
+        currentQuestion={currentQuestion + 1}
+        totalQuestions={quiz.questions.length}
+      />
     </div>
   );
 }

@@ -30,7 +30,7 @@ export default function Question({
   }, [question]);
 
   return (
-    <Card>
+    <Card className="w-full max-w-2xl">
       <CardHeader>
         <CardTitle className="font-normal text-lg">
           {question.question}

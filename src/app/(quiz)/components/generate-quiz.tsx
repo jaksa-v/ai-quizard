@@ -28,7 +28,7 @@ export default function Quiz() {
   };
 
   return (
-    <div className="relative w-full max-w-2xl">
+    <div className="relative w-full max-w-2xl flex justify-center">
       {error && <p className="text-red-500 mb-4">{error?.message}</p>}
       {object ? (
         <span className="text-muted-foreground">Done! Initializing...</span>
