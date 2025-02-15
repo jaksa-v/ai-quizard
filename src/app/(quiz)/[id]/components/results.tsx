@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import GenerateQuiz from "../../components/generate-quiz";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeftIcon, HistoryIcon } from "lucide-react";
 import Link from "next/link";
 
 type ResultsProps = {
@@ -65,8 +65,14 @@ export default function Results({ quiz, userAnswers }: ResultsProps) {
           <div className="flex gap-x-2">
             <Link href="/">
               <Button variant="link">
-                <ArrowLeft />
+                <ArrowLeftIcon />
                 Home
+              </Button>
+            </Link>
+            <Link href="/my">
+              <Button variant="link">
+                <HistoryIcon />
+                My Quizzes
               </Button>
             </Link>
             {/* <Button onClick={onReset} variant="outline">

@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { sql } from "drizzle-orm";
+import { sql, relations } from "drizzle-orm";
 import { text, sqliteTable, index, integer } from "drizzle-orm/sqlite-core";
 
 export const quizzes = sqliteTable(
@@ -25,6 +25,10 @@ export const quizzes = sqliteTable(
   },
   (table) => [index("user_id_idx").on(table.userId)]
 );
+
+export const quizzesRelations = relations(quizzes, ({ many }) => ({
+  attempts: many(quizAttempt),
+}));
 
 export const quizAttempt = sqliteTable(
   "quiz_attempts",
@@ -57,6 +61,13 @@ export const quizAttempt = sqliteTable(
     index("quiz_progress_user_quiz_idx").on(table.userId, table.quizId),
   ]
 );
+
+export const quizAttemptsRelations = relations(quizAttempt, ({ one }) => ({
+  quiz: one(quizzes, {
+    fields: [quizAttempt.quizId],
+    references: [quizzes.id],
+  }),
+}));
 
 export type Quiz = typeof quizzes.$inferSelect;
 export type QuizAttempt = typeof quizAttempt.$inferSelect;

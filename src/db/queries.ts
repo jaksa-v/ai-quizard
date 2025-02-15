@@ -17,6 +17,15 @@ export const QUERIES = {
       );
     return attempt[0];
   },
+  getQuizzesByUserId: async function (userId: string) {
+    const quizzesDB = await db.query.quizzes.findMany({
+      with: {
+        attempts: true,
+      },
+      where: eq(quizzes.userId, userId),
+    });
+    return quizzesDB;
+  },
 };
 
 export const MUTATIONS = {
