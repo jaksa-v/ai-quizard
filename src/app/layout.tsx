@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/app/_providers/theme-provider";
+import { PostHogProvider } from "@/app/_providers/posthog-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
@@ -36,18 +37,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* <header className="max-w-screen-xl mx-auto flex justify-between items-center p-4">
-              <Link href="/">
-                <Button variant="link">Home</Button>
-              </Link>
-              <div className="flex gap-x-2">
-                <ModeToggle />
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-              </div>
-            </header> */}
-            {children}
+            <PostHogProvider>{children}</PostHogProvider>
           </ThemeProvider>
         </body>
       </html>
