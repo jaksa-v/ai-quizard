@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BrainIcon } from "lucide-react";
-import GenerateQuiz from "../../components/generate-quiz";
+import { BrainIcon, CircleFadingPlus } from "lucide-react";
 
 interface QuizListProps {
   userId: string;
@@ -34,7 +33,12 @@ export async function QuizList({ userId }: QuizListProps) {
           You haven&apos;t created any quizzes yet. Generate your first quiz to
           get started!
         </p>
-        <GenerateQuiz />
+        <Link href="/">
+          <Button variant="default">
+            <CircleFadingPlus />
+            Generate Quiz
+          </Button>
+        </Link>
       </div>
     );
   }

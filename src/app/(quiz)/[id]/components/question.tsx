@@ -1,4 +1,4 @@
-import type { QuizQuestion } from "@/types/quiz";
+import type { QuizQuestion } from "@/lib/quiz";
 import { Button } from "@/components/ui/button";
 import {
   Card,

@@ -1,7 +1,7 @@
 "use server";
 
 import { MUTATIONS } from "@/db/queries";
-import { Quiz, quizSchema } from "@/types/quiz";
+import { Quiz, quizSchema } from "@/lib/quiz";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";

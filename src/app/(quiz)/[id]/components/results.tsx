@@ -1,4 +1,4 @@
-import type { Quiz } from "@/types/quiz";
+import type { Quiz } from "@/lib/quiz";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,8 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import GenerateQuiz from "../../components/generate-quiz";
-import { ArrowLeftIcon, HistoryIcon } from "lucide-react";
+import { CircleFadingPlus, HistoryIcon } from "lucide-react";
 import Link from "next/link";
 
 type ResultsProps = {
@@ -62,13 +61,7 @@ export default function Results({ quiz, userAnswers }: ResultsProps) {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col md:flex-row justify-center items-center gap-2 mt-auto border-t pt-4">
-          <div className="flex gap-x-2">
-            <Link href="/">
-              <Button variant="link">
-                <ArrowLeftIcon />
-                Home
-              </Button>
-            </Link>
+          <div className="flex gap-x-1">
             <Link href="/my">
               <Button variant="link">
                 <HistoryIcon />
@@ -78,8 +71,13 @@ export default function Results({ quiz, userAnswers }: ResultsProps) {
             {/* <Button onClick={onReset} variant="outline">
               Restart Quiz
             </Button> */}
+            <Link href="/">
+              <Button variant="link">
+                <CircleFadingPlus />
+                Generate Another
+              </Button>
+            </Link>
           </div>
-          <GenerateQuiz buttonText="Generate Another" />
         </CardFooter>
       </Card>
     </div>

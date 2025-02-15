@@ -1,16 +1,24 @@
 import { z } from "zod";
 
-// IDEAS
-// - True/False
-// - Fill-in-the-blank
-// - Image-based (describe hypothetical image)
-// - Sequential ordering
+export const categories = [
+  "Science",
+  "History",
+  "Pop Culture",
+  "Technology",
+  "Arts",
+  "Geography",
+  "Sports",
+  "Literature",
+] as const;
 
-export const prompt = `
-You are a expert quiz creator.
+export type Category = typeof categories[number];
 
-Generate a diverse 5-question quiz that spans at least 4 different subject categories 
-(science, history, pop culture, technology, arts, or geography). 
+export const categorySchema = z.enum(categories);
+
+export function generatePrompt(selectedCategories: Category[]) {
+  return `You are an expert quiz creator.
+
+Generate a diverse 5-question quiz focusing on the following categories: ${selectedCategories.join(", ")}.
 
 1. Ensure questions cover different difficulty levels (easy, medium, hard)
 
@@ -22,6 +30,7 @@ Generate a diverse 5-question quiz that spans at least 4 different subject categ
 
 4. Sometimes include surprising, lesser-known facts across different domains,
 or include plausible distractors.`;
+}
 
 export const quizQuestionSchema = z.object({
   question: z.string(),

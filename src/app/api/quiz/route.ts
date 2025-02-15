@@ -1,6 +1,6 @@
 "use server";
 
-import { quizSchema } from "@/types/quiz";
+import { quizSchema } from "@/lib/quiz";
 import { anthropic } from "@ai-sdk/anthropic";
 import { auth } from "@clerk/nextjs/server";
 import { generateObject } from "ai";

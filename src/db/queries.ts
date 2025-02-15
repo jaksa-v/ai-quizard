@@ -1,4 +1,4 @@
-import { Quiz } from "@/types/quiz";
+import { Quiz } from "@/lib/quiz";
 import { db } from ".";
 import { quizAttempt, quizzes } from "./schema";
 import { eq, and } from "drizzle-orm";

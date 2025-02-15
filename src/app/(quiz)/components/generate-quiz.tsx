@@ -1,16 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { quizSchema, prompt } from "@/types/quiz";
-import { experimental_useObject as useObject } from "ai/react";
+import { quizSchema, generatePrompt, Category } from "@/lib/quiz";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { useRouter } from "next/navigation";
 import { createQuizAttempt, saveQuiz } from "@/app/(quiz)/actions";
+import CategoryForm from "./category-form";
 
-interface QuizProps {
-  buttonText?: string;
-}
-
-export default function Quiz({ buttonText = "Generate Quiz" }: QuizProps) {
+export default function Quiz() {
   const router = useRouter();
   const { object, submit, isLoading, stop, error } = useObject({
     api: "/api/quiz",
@@ -25,24 +21,23 @@ export default function Quiz({ buttonText = "Generate Quiz" }: QuizProps) {
       router.push(`/${quizId}`);
     },
   });
+
+  const handleSubmit = (categories: Category[]) => {
+    const prompt = generatePrompt(categories);
+    submit(prompt);
+  };
+
   return (
-    <div className="relative">
-      {error && <p>{error?.message}</p>}
+    <div className="relative w-full max-w-2xl">
+      {error && <p className="text-red-500 mb-4">{error?.message}</p>}
       {object ? (
         <span className="text-muted-foreground">Done! Initializing...</span>
       ) : (
-        <Button onClick={() => submit(prompt)}>
-          {isLoading ? "Generating..." : buttonText}
-        </Button>
-      )}
-      {isLoading && (
-        <Button
-          className="absolute -right-16 top-0"
-          variant="link"
-          onClick={() => stop()}
-        >
-          Stop
-        </Button>
+        <CategoryForm
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+          stop={stop}
+        />
       )}
     </div>
   );
