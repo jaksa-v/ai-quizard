@@ -3,6 +3,7 @@
 import { quizSchema, generatePrompt, Category } from "@/lib/quiz";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 import { createQuizAttempt, saveQuiz } from "@/app/(quiz)/actions";
 import CategoryForm from "./category-form";
 
@@ -32,7 +33,10 @@ export default function Quiz() {
     <div className="relative w-full max-w-2xl flex justify-center">
       {error && <p className="text-red-500 mb-4">{error?.message}</p>}
       {object ? (
-        <span className="text-muted-foreground">Done! Initializing...</span>
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <span>Done! Initializing...</span>
+        </div>
       ) : (
         <CategoryForm
           onSubmit={handleSubmit}

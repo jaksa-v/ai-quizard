@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Category, MAX_CATEGORIES, categories } from "@/lib/quiz";
+import { CircleFadingPlus, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 interface CategoryFormProps {
@@ -69,7 +70,17 @@ export default function CategoryForm({
           disabled={selectedCategories.length === 0 || isLoading}
           className="w-auto"
         >
-          {isLoading ? "Generating..." : "Generate Quiz"}
+          {isLoading ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Generating...
+            </>
+          ) : (
+            <>
+              <CircleFadingPlus />
+              Generate Quiz
+            </>
+          )}
         </Button>
         {isLoading && (
           <Button
