@@ -11,6 +11,8 @@ export const categories = [
   "Literature",
 ] as const;
 
+export const MAX_CATEGORIES = 5;
+
 export type Category = (typeof categories)[number];
 
 export const categorySchema = z.enum(categories);
