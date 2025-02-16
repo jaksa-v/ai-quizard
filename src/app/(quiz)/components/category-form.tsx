@@ -52,12 +52,33 @@ export default function CategoryForm({
             </button>
           );
         })}
+        <button
+          type="button"
+          onClick={() => {
+            setSelectedCategories(
+              selectedCategories.length === categories.length
+                ? []
+                : [...categories]
+            );
+          }}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
+            ${
+              selectedCategories.length === categories.length
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+            }
+          `}
+        >
+          {selectedCategories.length === categories.length
+            ? "Deselect All"
+            : "Select All"}
+        </button>
       </div>
       <div className="relative flex justify-center">
         <Button
           type="submit"
           disabled={selectedCategories.length === 0 || isLoading}
-          className="w-full sm:w-auto"
+          className="w-auto"
         >
           {isLoading ? "Generating..." : "Generate Quiz"}
         </Button>
