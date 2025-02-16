@@ -1,7 +1,7 @@
 import { Quiz } from "@/lib/quiz";
 import { db } from ".";
 import { quizAttempt, quizzes } from "./schema";
-import { eq, and } from "drizzle-orm";
+import { eq, and, desc } from "drizzle-orm";
 
 export const QUERIES = {
   getQuizById: async function (id: string) {
@@ -23,6 +23,7 @@ export const QUERIES = {
         attempts: true,
       },
       where: eq(quizzes.userId, userId),
+      orderBy: [desc(quizzes.updatedAt)],
     });
     return quizzesDB;
   },
