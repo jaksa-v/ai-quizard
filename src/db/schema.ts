@@ -1,3 +1,4 @@
+import { Category } from "@/lib/quiz";
 import { createId } from "@paralleldrive/cuid2";
 import { sql, relations } from "drizzle-orm";
 import { text, sqliteTable, index, integer } from "drizzle-orm/sqlite-core";
@@ -16,6 +17,9 @@ export const quizzes = sqliteTable(
         correctAnswerIndex: number;
       }[]
     >(),
+    categories: text("categories", { mode: "json" })
+      .$type<Category[]>()
+      .notNull(),
     createdAt: text("created_at")
       .notNull()
       .default(sql`CURRENT_TIMESTAMP`),

@@ -11,14 +11,15 @@ export const categories = [
   "Literature",
 ] as const;
 
-export type Category = typeof categories[number];
+export type Category = (typeof categories)[number];
 
 export const categorySchema = z.enum(categories);
 
 export function generatePrompt(selectedCategories: Category[]) {
   return `You are an expert quiz creator.
 
-Generate a diverse 5-question quiz focusing on the following categories: ${selectedCategories.join(", ")}.
+Generate a diverse 5-question quiz focusing on the following categories:
+${selectedCategories.join(", ")}.
 
 1. Ensure questions cover different difficulty levels (easy, medium, hard)
 
@@ -40,6 +41,7 @@ export const quizQuestionSchema = z.object({
 
 export const quizSchema = z.object({
   questions: z.array(quizQuestionSchema),
+  categories: z.array(categorySchema).default([]),
 });
 
 export type QuizQuestion = z.infer<typeof quizQuestionSchema>;

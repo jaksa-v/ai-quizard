@@ -23,6 +23,7 @@ export default function Quiz() {
   });
 
   const handleSubmit = (categories: Category[]) => {
+    if (categories.length === 0) return;
     const prompt = generatePrompt(categories);
     submit(prompt);
   };

@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BrainIcon, CircleFadingPlus } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface QuizListProps {
   userId: string;
@@ -47,20 +48,31 @@ export async function QuizList({ userId }: QuizListProps) {
     <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {quizzes.map((quiz) => (
         <li key={quiz.id}>
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle className="line-clamp-1">
-                Quiz #{quiz.id.slice(-4)}
-              </CardTitle>
-              <CardDescription>
-                {quiz.questions.length} questions
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Created {new Date(quiz.createdAt).toLocaleDateString()}
-              </p>
-            </CardContent>
+          <Card className="h-full flex flex-col justify-between">
+            <div>
+              <CardHeader>
+                <CardTitle className="line-clamp-1">
+                  Quiz #{quiz.id.slice(-4)}
+                </CardTitle>
+                <CardDescription>
+                  {quiz.questions.length} questions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">
+                    Created {new Date(quiz.createdAt).toLocaleDateString()}
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {quiz.categories.map((category) => (
+                      <Badge key={category} variant="secondary">
+                        {category}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </div>
             <CardFooter>
               <Link href={`/${quiz.id}`} className="w-full">
                 <Button variant="outline" className="w-full">
